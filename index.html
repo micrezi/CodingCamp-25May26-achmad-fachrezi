@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Expense &amp; Budget Visualizer</h1>
+    <div id="balance-display">Total: $0.00</div>
+  </header>
+
+  <main>
+
+    <!-- Add Transaction Form -->
+    <section id="add-transaction">
+      <form id="transaction-form">
+        <label for="item-name">Item Name</label>
+        <input id="item-name" type="text" maxlength="100" placeholder="e.g. Lunch" required />
+
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" step="0.01" min="0.01" placeholder="e.g. 12.50" required />
+
+        <label for="category">Category</label>
+        <select id="category">
+          <option value="Food">Food</option>
+          <option value="Transport">Transport</option>
+          <option value="Fun">Fun</option>
+        </select>
+
+        <button type="submit">Add</button>
+      </form>
+      <div id="form-errors" aria-live="polite"></div>
+    </section>
+
+    <!-- Budget Limits -->
+    <section id="budget-limits">
+      <div class="budget-row" data-category="Food">
+        <label>Food limit:
+          <input type="number" step="0.01" min="0.01" placeholder="No limit" />
+        </label>
+        <span class="budget-error" aria-live="polite"></span>
+      </div>
+      <div class="budget-row" data-category="Transport">
+        <label>Transport limit:
+          <input type="number" step="0.01" min="0.01" placeholder="No limit" />
+        </label>
+        <span class="budget-error" aria-live="polite"></span>
+      </div>
+      <div class="budget-row" data-category="Fun">
+        <label>Fun limit:
+          <input type="number" step="0.01" min="0.01" placeholder="No limit" />
+        </label>
+        <span class="budget-error" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <!-- Sort Control -->
+    <section id="sort-control">
+      <label for="sort-select">Sort by:</label>
+      <select id="sort-select">
+        <option value="amount-asc">Amount (Low → High)</option>
+        <option value="amount-desc">Amount (High → Low)</option>
+        <option value="category-az">Category (A–Z)</option>
+      </select>
+    </section>
+
+    <!-- Transaction List -->
+    <section id="transaction-list-section">
+      <ul id="transaction-list"></ul>
+      <p id="empty-state" hidden>No expenses currently shown.</p>
+    </section>
+
+    <!-- Chart -->
+    <section id="chart-section">
+      <canvas id="spending-chart"></canvas>
+      <p id="chart-empty-state" hidden>No data to display.</p>
+    </section>
+
+    <!-- Monthly Summary (toggled view) -->
+    <section id="monthly-summary" hidden>
+      <div id="monthly-summary-content"></div>
+    </section>
+
+    <!-- View Toggle -->
+    <button id="toggle-summary">View Monthly Summary</button>
+
+  </main>
+
+  <!-- Global Error Banner -->
+  <div id="global-error" aria-live="assertive" hidden></div>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- App Module -->
+  <script src="js/app.js" type="module"></script>
+
+</body>
+</html>
